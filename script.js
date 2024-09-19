@@ -36,6 +36,7 @@ const roleSkills = {
 };
 
 const ranks = ["F", "E", "D", "C", "B", "A", "S"];
+const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire"];
 const titles = [
     "Champion of Light", "Dark Lord", "Master Swordsman", "Adept of Shadows", "Guardian of the Forest",
     "Slayer of Beasts", "Bringer of Death", "Harbinger of Doom", "Master of Elements", "Stormcaller",
@@ -43,7 +44,7 @@ const titles = [
     "Eternal Warrior", "Master of Stealth", "Undying Warrior", "Lightbringer", "Shadow Stalker",
     "Mage of the Arcane", "Grand Healer", "Ultimate Chef", "Master Blacksmith", "Savior of the Realm", "King of Shadows", "Champion of the Arena", "Silent Blade", "Storm Bringer",
     "Warden of the North", "Guardian of Souls", "Wong Ireng", "Penyuka Anak Kecil",
-    "Player Genshit", "Doctor Furry", "Kang Rasis", "Klemer", "Karbit", "Solid Solid Solid"];
+    "Player Genshin", "Doctor Furry", "Kang Rasis", "Klemer", "Karbit", "Solid Solid Solid", "LET HIM COOK", "Menyala Abangku", "Pria Misterius", "Jomok", "What The Sigma", "Newbie Killer", "Weeb"];
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -69,6 +70,9 @@ function submitName() {
         const health = getRandomNumber(25, 100);
         const mana = getRandomNumber(1, 100);
         const agi = getRandomNumber(1, 100);
+        const lev = getRandomNumber(1, 100);
+        const guild = getRandomElement(guilds);
+        const ra = getRandomElement(ranks);
         const characterSkills = [];
         const numberOfSkills = getRandomNumber(3, 5);
 
@@ -103,11 +107,14 @@ function submitName() {
 
         document.getElementById("charName").textContent = name;
         document.getElementById("charAgi").textContent = agi;
+        document.getElementById("charLev").textContent = lev;
         document.getElementById("charRole").textContent = role;
         document.getElementById("charRace").textContent = race;
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
+        document.getElementById("charRank").textContent = ra;
+        document.getElementById("charGuild").textContent = guild;
 
         if (["Healer", "Paladin", "Saint"].includes(role)) {
             const divinePower = getRandomNumber(50, 100);
