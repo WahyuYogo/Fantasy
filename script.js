@@ -85,11 +85,15 @@ function submitName() {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
             if (!characterSkills.includes(skill)) {
-                characterSkills.push(${skill} (Rank ${rank}));
+                // characterSkills.push(${skill} (Rank ${rank}));
+                characterSkills.push({
+                    skill: skill,
+                    rank: rank
+                })
             }
 
             const listItem = document.createElement("li");
-            listItem.textContent = ${skill} (Rank ${rank});
+            listItem.textContent = `${skill} (Rank ${rank})`;
             skillList.appendChild(listItem);
         }
 
@@ -101,7 +105,7 @@ function submitName() {
             const title = getRandomElement(titles);
             const titleRank = getRandomElement(ranks);
             const listItem = document.createElement("li");
-            listItem.textContent = ${title} (Rank ${titleRank});
+            listItem.textContent = `${title} (Rank ${titleRank})`;
             titleList.appendChild(listItem);
         }
 
