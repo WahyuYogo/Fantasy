@@ -39,7 +39,7 @@ const roleSkills = {
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"]
 };
 
-const ranks = ["F", "E", "D", "C", "B", "A", "S"];
+const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS", "SSR"];
 const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "El Gasing"];
 const titles = {
     "Knight": ["Champion of Light", "Guardian of the Realm", "Master of Arms", "Sword Guardian", "Defender of the Weak"],
@@ -145,7 +145,7 @@ function submitName() {
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
-        // document.getElementById("charRank").textContent = ra;
+        document.getElementById("charRank").textContent = ra;
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
 
