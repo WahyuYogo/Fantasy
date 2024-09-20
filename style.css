@@ -30,7 +30,3 @@ body {
 .form-control::placeholder {
     color: rgb(185, 185, 185);
 }
-
-hr {
-    border-top: 3px double #9CEDFF;
-}
