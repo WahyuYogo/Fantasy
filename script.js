@@ -13,7 +13,7 @@ const races = [
 const regions = [
     "LowRess Kingdom", "Liberia", "Great Forest", "Heavenhold", "Kingdom of Erusea", "Soviet Republics"
 ];
-
+const gender = ["Male", "Female", "Non-binary"];
 const roleSkills = {
     "Knight": ["Sword Mastery", "Shield Mastery", "Mounted Combat", "War Cry", "Heavy Armor", "Tactical Strategy", "Battle Charge", "Shield Bash", "Combat Reflexes", "Defensive Stance", "Sword Block", "Battlefield Awareness", "Parry", "Shield Slam", "Armor Reinforcement", "Toughness", "Sword Precision", "Holy Vow", "Defender's Resolve", "Battle Endurance"],
     "Mage": ["Fire Magic", "Water Magic", "Earth Magic", "Wind Magic", "Lightning Magic", "Arcane Magic", "Teleportation", "Time Manipulation", "Illusion", "Energy Bolt", "Mana Control", "Dark Magic", "Summon Elementals", "Meteor Shower", "Magic Shield", "Mana Drain", "Arcane Blast", "Magic Ward", "Mana Burst", "Elemental Mastery"],
@@ -39,7 +39,7 @@ const roleSkills = {
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"],
     "Rifleman": ["Precise Aim", "Wind Estimation", "Critical Strike", "Lethality", "Mass Shooting", "Bayonet Fight", "Multishot", "Dead Eye", "Overload", "Suppresive Fire", "Close Air Support", "Guerrilla", "Artillery Strike", "Iron Clad", "Dual Welding", "Bullseye", "Total Focus", "Eyes In The Sky", "Infinite Mazagine", "Bulletproof", "Limit Break", "Two Birds One Stone", "APHE Shots"]
 };
-
+const status = ["Married", "Divorced", "Widowed", "Alone", "Engaged"];
 const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"];
 const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "El Gasing", "Mariners"];
 const titles = {
@@ -102,6 +102,7 @@ function submitName() {
         const region = getRandomElement(regions);
         const characterSkills = [];
         const numberOfSkills = getRandomNumber(3, 5);
+        const age = getRandomNumber(22, 60);
 
         const skillList = document.getElementById("charSkill");
         skillList.innerHTML = "";
@@ -112,7 +113,7 @@ function submitName() {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
             if (!characterSkills.includes(skill)) {
-                characterSkills.push(`${skill} (Rank ${rank})`);
+                //characterSkills.push(`${skill} (Rank ${rank})`);
                 characterSkills.push({
                     skill: skill,
                     rank: rank
@@ -147,9 +148,10 @@ function submitName() {
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
-        document.getElementById("charRank").textContent = ra;
+        //document.getElementById("charRank").textContent = ra;
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
+        document.getElementById("charAge").textContent = age;
 
         if (["Healer", "Paladin", "Saint"].includes(role)) {
             const divinePower = getRandomNumber(50, 100);
