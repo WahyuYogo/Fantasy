@@ -76,19 +76,19 @@ const roleWeapon = {
     "Blacksmith": ["Hammer", "Anvil", "Pickaxe", "Shovel", "Axe"],
     "Healer": ["Staff of Cleanse", "Staff of Healing", "Staff of Regeneration", "Book of Healing"],
     "Assasin": ["Katana", "Wakizashi", "Shuriken", "Daggers", "Sickle"],
-    "Saint": [],
+    "Saint": ["Unknown"],
     "Tamer": ["Bear", "Crocodile", "Dinosaur", "Elephant", "Tiger", "Leopard"],
     "Necromancer": ["Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
-    "Unknown": [],
+    "Unknown": ["Unknown"],
     "Death Knight": ["Reaper", "Undead Heavy Sword", "Short Sword of Death", "Sword and Shield", "Spear", "Club", "Bat"],
     "Farmer": ["Sickles", "Pitchforks", "Sticks", "Stone", "Bat"],
-    "Demon King": [],
+    "Demon King": ["Unknown"],
     "Swordman": ["Heavy Sword", "Short Sword", "Daggers", "Katana", "Wakizashi", "Cleaver"],
     "Magic Swordman": ["Magic-induced Heavy Sword", "Magic-induced Short Sword", "Magic-induced Daggers", "Magic-induced Katana", "Magic-induced Wakizashi", "Magic-induced Cleaver"],
-    "Martial Artist" :[],
-    "Trader": [],
+    "Martial Artist" :["Barehand", "Nunchucks", "Fighting Gloves"],
+    "Trader": ["None"],
     "Archmage": ["Staff of Water", "Staff of Earth", "Staff of Fire", "Staff of Darkness", "Metal Staff", "Magic Book", "Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
-    "Slave": [],
+    "Slave": ["None"],
     "Chef": ["Cleaver", "Axe", "Spatula", "Saucepan", "Wok", "Pot", "Kettle", "Rolling Pin"],
     "Rifleman": ["Pistol", "Dagger", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle", "Flashbang", "Frag Grenade"]
 };
@@ -99,8 +99,6 @@ function getRandomElement(arr) {
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-const Weapon = document.getElementById("weaponry");
-Weapon.style.display = "None";
 function submitName() {
     const name = document.getElementById("nameInput").value;
     if (name) {
@@ -169,24 +167,10 @@ function submitName() {
         }
 
         for (let i = 0; i <WeaponNumber; i++){
-            if(role == "Saint" || role == "Unknown" || role == "Demon King" || role == "Martial Artist" || role == "Trader" || role == "Slave"){
-                Weapon.style.display = "None";
-            }
-            else{
-                Weapon.style.display = "block";
-                const weapon = getRandomElement(availableWeapon);
-                const rank = getRandomElement(ranks);
-                if(role == "Tamer"){
-                    document.getElementById("name").innerHTML = "Favorite Animal";
-                    if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`)
-                    }
-                }
-                else{
-                    if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`)
-                    }
-                }
+            const weapon = getRandomElement(availableWeapon);
+            const rank = getRandomElement(ranks);
+            if(!characterWeapon.includes(weapon)){
+                characterWeapon.push(`${weapon} (Rank ${rank})`)
             }
         }
 
@@ -203,7 +187,6 @@ function submitName() {
         document.getElementById("charRegion").textContent = region;
         document.getElementById("charAge").textContent = age;
         document.getElementById("charStatus").textContent = situation;
-        document.getElementById("charWeapon").textContent = characterWeapon;
         document.getElementById("charWeapon").textContent = characterWeapon;
 
         if (["Healer", "Paladin", "Saint"].includes(role)) {
