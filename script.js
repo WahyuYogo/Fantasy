@@ -10,6 +10,10 @@ const races = [
     "Sarkaz", "Liberi", "Sankta", "Deer", "Fishman", "Unknown"
 ];
 
+const regions = [
+    "LowRess Kingdom", "Liberia", "Great Forest", "Heavenhold"
+];
+
 const roleSkills = {
     "Knight": ["Sword Mastery", "Shield Mastery", "Mounted Combat", "War Cry", "Heavy Armor", "Tactical Strategy", "Battle Charge", "Shield Bash", "Combat Reflexes", "Defensive Stance", "Sword Block", "Battlefield Awareness", "Parry", "Shield Slam", "Armor Reinforcement", "Toughness", "Sword Precision", "Holy Vow", "Defender's Resolve", "Battle Endurance"],
     "Mage": ["Fire Magic", "Water Magic", "Earth Magic", "Wind Magic", "Lightning Magic", "Arcane Magic", "Teleportation", "Time Manipulation", "Illusion", "Energy Bolt", "Mana Control", "Dark Magic", "Summon Elementals", "Meteor Shower", "Magic Shield", "Mana Drain", "Arcane Blast", "Magic Ward", "Mana Burst", "Elemental Mastery"],
@@ -35,16 +39,32 @@ const roleSkills = {
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"]
 };
 
-const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"];
+const ranks = ["F", "E", "D", "C", "B", "A", "S"];
 const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "El Gasing"];
-const titles = [
-    "Champion of Light", "Dark Lord", "Master Swordsman", "Adept of Shadows", "Guardian of the Forest",
-    "Slayer of Beasts", "Bringer of Death", "Harbinger of Doom", "Master of Elements", "Stormcaller",
-    "Divine Protector", "Beast Master", "Necromancer King", "Archmage Supreme", "Emperor of Flames",
-    "Eternal Warrior", "Master of Stealth", "Undying Warrior", "Lightbringer", "Shadow Stalker",
-    "Mage of the Arcane", "Grand Healer", "Ultimate Chef", "Master Blacksmith", "Savior of the Realm", "King of Shadows", "Champion of the Arena", "Silent Blade", "Storm Bringer",
-    "Warden of the North", "Guardian of Souls", "Wong Ireng", "Penyuka Anak Kecil",
-    "Player Genshin", "Doctor Furry", "Kang Rasis", "Klemer", "Karbit", "Solid Solid Solid", "LET HIM COOK", "Menyala Abangku", "Pria Misterius", "Jomok", "What The Sigma", "Newbie Killer", "Weeb", "Dingin Tetapi Tidak Kejam", "LET ME COOK", "Cheater", "Main Chararcter", "Nerd"];
+const titles = {
+    "Knight": ["Champion of Light", "Guardian of the Realm", "Master of Arms", "Sword Guardian", "Defender of the Weak"],
+    "Mage": ["Master of Elements", "Arcane Scholar", "Stormcaller", "Elemental Weaver", "Mystic of the Arcane"],
+    "Rogue": ["Adept of Shadows", "Silent Blade", "Shadow Stalker", "Master Thief", "Cloaked Avenger"],
+    "Archer": ["Eagle Eye", "Sharpshooter", "Bowmaster", "Hunter of the Wild", "Silent Marksman"],
+    "Paladin": ["Divine Protector", "Lightbringer", "Holy Crusader", "Guardian of the Faith", "Shield of Light"],
+    "Blacksmith": ["Master Blacksmith", "Forge Master", "Hammer of the Forge", "Steel Crafter", "Anvil Guardian"],
+    "Healer": ["Grand Healer", "Life Restorer", "Saint of Light", "Divine Medic", "Reviver of Souls"],
+    "Assassin": ["Master Assassin", "Death's Whisper", "Silent Executioner", "Shadow's Edge", "Night Hunter"],
+    "Saint": ["Blessed Savior", "Eternal Light", "Divine Speaker", "Holy Guardian", "Radiant Saint"],
+    "Tamer": ["Beast Master", "Wild Whisperer", "Rider of Beasts", "Nature's Bond", "Animal Sovereign"],
+    "Necromancer": ["Necromancer King", "Master of the Dead", "Soul Weaver", "Lord of Shadows", "Gravecaller"],
+    "Unknown": ["Enigma", "Fate Twister", "Seeker of the Unknown", "Wielder of Chaos", "Shifter of Realms"],
+    "Death Knight": ["Reaper of Souls", "Doombringer", "Knight of Death", "Grim Commander", "Bearer of Darkness"],
+    "Farmer": ["Harvest Lord", "Master of Fields", "Crop Sovereign", "Tiller of the Earth", "Lord of the Land"],
+    "Demon King": ["Emperor of Flames", "Lord of Chaos", "Dark Overlord", "Hell's Ruler", "Master of Despair"],
+    "Swordman": ["Master Swordsman", "Blademaster", "Sword Sage", "Steel Tempest", "Blade Lord"],
+    "Magic Swordman": ["Arcane Blademaster", "Mystic Swordsman", "Elemental Bladesman", "Spellblade", "Mana Wielder"],
+    "Martial Artist": ["Master of Fists", "Chi Guardian", "Iron Fist", "Dragon Warrior", "Martial Master"],
+    "Trader": ["Master Merchant", "Goldfinger", "Wealth Accumulator", "Lord of Trade", "Market King"],
+    "Archmage": ["Archmage Supreme", "Master of Magic", "Eternal Scholar", "Cosmic Magus", "Arcane Sovereign"],
+    "Slave": ["Survivor", "Endurer of Chains", "Liberated Soul", "Unseen Warrior", "Silent Strength"],
+    "Chef": ["Ultimate Chef", "Gourmet King", "Master of Flavors", "Grand Cook", "Sovereign of Taste"],
+};
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -62,7 +82,11 @@ function submitName() {
         let role;
         do {
             role = getRandomElement(roles);
-        } while (race === "Demon" && ["Healer", "Paladin", "Saint"].includes(role));
+        } while (
+            (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
+            (role === "Blacksmith" && race !== "Dwarf")
+        );
+
 
         document.getElementById("inputForm").style.display = "none";
 
@@ -73,6 +97,7 @@ function submitName() {
         const lev = getRandomNumber(1, 100);
         const guild = getRandomElement(guilds);
         const ra = getRandomElement(ranks);
+        const region = getRandomElement(regions);
         const characterSkills = [];
         const numberOfSkills = getRandomNumber(3, 5);
 
@@ -101,8 +126,11 @@ function submitName() {
         const titleList = document.getElementById("charTitle");
         titleList.innerHTML = "";
 
+        const availableTitles = titles[role];
+
+
         for (let i = 0; i < titlesCount; i++) {
-            const title = getRandomElement(titles);
+            const title = getRandomElement(availableTitles);
             const titleRank = getRandomElement(ranks);
             const listItem = document.createElement("li");
             listItem.textContent = `${title} (Rank ${titleRank})`;
@@ -117,8 +145,9 @@ function submitName() {
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
-        document.getElementById("charRank").textContent = ra;
+        // document.getElementById("charRank").textContent = ra;
         document.getElementById("charGuild").textContent = guild;
+        document.getElementById("charRegion").textContent = region;
 
         if (["Healer", "Paladin", "Saint"].includes(role)) {
             const divinePower = getRandomNumber(50, 100);
