@@ -112,7 +112,7 @@ function submitName() {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
             if (!characterSkills.includes(skill)) {
-                // characterSkills.push(${skill} (Rank ${rank}));
+                characterSkills.push(`${skill} (Rank ${rank})`);
                 characterSkills.push({
                     skill: skill,
                     rank: rank
