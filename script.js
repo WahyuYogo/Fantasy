@@ -1,7 +1,7 @@
 const roles = [
     "Knight", "Mage", "Rogue", "Archer", "Paladin", "Blacksmith", "Healer", "Assassin", "Saint", "Tamer",
     "Necromancer", "Unknown", "Death Knight", "Farmer", "Demon King", "Swordman", "Magic Swordman",
-    "Martial Art", "Trader", "Archmage", "Slave", "Chef"
+    "Martial Artist", "Trader", "Archmage", "Slave", "Chef"
 ];
 
 const races = [
@@ -35,17 +35,16 @@ const roleSkills = {
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"]
 };
 
-const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"];
-const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "El Gasing];
-const titles = ["Champion of Light", "Dark Lord", "Master Swordsman", "Adept of Shadows", "Guardian of the Forest",
+const ranks = ["F", "E", "D", "C", "B", "A", "S"];
+const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire"];
+const titles = [
+    "Champion of Light", "Dark Lord", "Master Swordsman", "Adept of Shadows", "Guardian of the Forest",
     "Slayer of Beasts", "Bringer of Death", "Harbinger of Doom", "Master of Elements", "Stormcaller",
     "Divine Protector", "Beast Master", "Necromancer King", "Archmage Supreme", "Emperor of Flames",
     "Eternal Warrior", "Master of Stealth", "Undying Warrior", "Lightbringer", "Shadow Stalker",
     "Mage of the Arcane", "Grand Healer", "Ultimate Chef", "Master Blacksmith", "Savior of the Realm", "King of Shadows", "Champion of the Arena", "Silent Blade", "Storm Bringer",
     "Warden of the North", "Guardian of Souls", "Wong Ireng", "Penyuka Anak Kecil",
-    "Player Genshin", "Doctor Furry", "Kang Rasis", "Klemer", "Karbit", "Solid Solid Solid", "LET HIM COOK", "Menyala Abangku", "Pria Misterius", "Jomok", "What The Sigma", "Newbie Killer", "Weeb",
-    "Dingin Tetapi Tidak Kejam", "LET ME COOK", "Cheater", "Main Chararcter", "Nerd"
-               ];
+    "Player Genshin", "Doctor Furry", "Kang Rasis", "Klemer", "Karbit", "Solid Solid Solid", "LET HIM COOK", "Menyala Abangku", "Pria Misterius", "Jomok", "What The Sigma", "Newbie Killer", "Weeb"];
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -86,11 +85,11 @@ function submitName() {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
             if (!characterSkills.includes(skill)) {
-                characterSkills.push(`${skill} (Rank ${rank})`);
+                characterSkills.push(${skill} (Rank ${rank}));
             }
 
             const listItem = document.createElement("li");
-            listItem.textContent = `${skill} (Rank ${rank})`;
+            listItem.textContent = ${skill} (Rank ${rank});
             skillList.appendChild(listItem);
         }
 
@@ -102,7 +101,7 @@ function submitName() {
             const title = getRandomElement(titles);
             const titleRank = getRandomElement(ranks);
             const listItem = document.createElement("li");
-            listItem.textContent = `${title} (Rank ${titleRank})`;
+            listItem.textContent = ${title} (Rank ${titleRank});
             titleList.appendChild(listItem);
         }
 
@@ -134,4 +133,3 @@ function submitName() {
         alert("Please enter a name.");
     }
 }
-
