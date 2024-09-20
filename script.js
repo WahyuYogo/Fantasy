@@ -13,7 +13,7 @@ const races = [
 const regions = [
     "LowRess Kingdom", "Liberia", "Great Forest", "Heavenhold", "Kingdom of Erusea", "Soviet Republics"
 ];
-const gender = ["Male", "Female", "Non-binary"];
+const genders = ["Male", "Female", "Non-binary"];
 const roleSkills = {
     "Knight": ["Sword Mastery", "Shield Mastery", "Mounted Combat", "War Cry", "Heavy Armor", "Tactical Strategy", "Battle Charge", "Shield Bash", "Combat Reflexes", "Defensive Stance", "Sword Block", "Battlefield Awareness", "Parry", "Shield Slam", "Armor Reinforcement", "Toughness", "Sword Precision", "Holy Vow", "Defender's Resolve", "Battle Endurance"],
     "Mage": ["Fire Magic", "Water Magic", "Earth Magic", "Wind Magic", "Lightning Magic", "Arcane Magic", "Teleportation", "Time Manipulation", "Illusion", "Energy Bolt", "Mana Control", "Dark Magic", "Summon Elementals", "Meteor Shower", "Magic Shield", "Mana Drain", "Arcane Blast", "Magic Ward", "Mana Burst", "Elemental Mastery"],
@@ -39,7 +39,7 @@ const roleSkills = {
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"],
     "Rifleman": ["Precise Aim", "Wind Estimation", "Critical Strike", "Lethality", "Mass Shooting", "Bayonet Fight", "Multishot", "Dead Eye", "Overload", "Suppresive Fire", "Close Air Support", "Guerrilla", "Artillery Strike", "Iron Clad", "Dual Welding", "Bullseye", "Total Focus", "Eyes In The Sky", "Infinite Mazagine", "Bulletproof", "Limit Break", "Two Birds One Stone", "APHE Shots"]
 };
-const status = ["Married", "Divorced", "Widowed", "Alone", "Engaged"];
+const stage = ["Married", "Divorced", "Widowed", "Alone", "Engaged"];
 const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"];
 const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "El Gasing", "Mariners"];
 const titles = {
@@ -67,7 +67,31 @@ const titles = {
     "Chef": ["Ultimate Chef", "Gourmet King", "Master of Flavors", "Grand Cook", "Sovereign of Taste"],
     "Rifleman": ["Deadshot", "Precision Shooter", "Pistol Specialist", "Rifle Expert", "Marines for Life"],
 };
-
+const roleWeapon = {
+    "Knight": ["Heavy Sword", "Short Sword", "Sword and Shield", "Spear", "Club", "Bat"],
+    "Mage": ["Staff of Water", "Staff of Earth", "Staff of Fire", "Staff of Darkness", "Metal Staff", "Magic Book"],
+    "Rogue": ["Daggers", "Short Sword", "Switchblade", "Club", "Cleaver", "Silenced Pistol"],
+    "Archer": ["Longbow", "Quick-fire Bow"],
+    "Paladin": ["Heavy Sword", "Short Sword", "Sword and Shield"],
+    "Blacksmith": ["Hammer", "Anvil", "Pickaxe", "Shovel", "Axe"],
+    "Healer": ["Staff of Cleanse", "Staff of Healing", "Staff of Regeneration", "Book of Healing"],
+    "Assasin": ["Katana", "Wakizashi", "Shuriken", "Daggers", "Sickle"],
+    "Saint": [],
+    "Tamer": ["Bear", "Crocodile", "Dinosaur", "Elephant", "Tiger", "Leopard"],
+    "Necromancer": ["Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
+    "Unknown": [],
+    "Death Knight": ["Reaper", "Undead Heavy Sword", "Short Sword of Death", "Sword and Shield", "Spear", "Club", "Bat"],
+    "Farmer": ["Sickles", "Pitchforks", "Sticks", "Stone", "Bat"],
+    "Demon King": [],
+    "Swordman": ["Heavy Sword", "Short Sword", "Daggers", "Katana", "Wakizashi", "Cleaver"],
+    "Magic Swordman": ["Magic-induced Heavy Sword", "Magic-induced Short Sword", "Magic-induced Daggers", "Magic-induced Katana", "Magic-induced Wakizashi", "Magic-induced Cleaver"],
+    "Martial Artist" :[],
+    "Trader": [],
+    "Archmage": ["Staff of Water", "Staff of Earth", "Staff of Fire", "Staff of Darkness", "Metal Staff", "Magic Book", "Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
+    "Slave": [],
+    "Chef": ["Cleaver", "Axe", "Spatula", "Saucepan", "Wok", "Pot", "Kettle", "Rolling Pin"],
+    "Rifleman": ["Pistol", "Dagger", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle", "Flashbang", "Frag Grenade"]
+};
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
@@ -75,7 +99,8 @@ function getRandomElement(arr) {
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+const Weapon = document.getElementById("weaponry");
+Weapon.style.display = "None";
 function submitName() {
     const name = document.getElementById("nameInput").value;
     if (name) {
@@ -103,12 +128,15 @@ function submitName() {
         const characterSkills = [];
         const numberOfSkills = getRandomNumber(3, 5);
         const age = getRandomNumber(22, 60);
-
+        const situation = getRandomElement(stage);
         const skillList = document.getElementById("charSkill");
         skillList.innerHTML = "";
 
         const availableSkills = roleSkills[role];
-
+        const availableWeapon = roleWeapon[role];
+        const characterWeapon = [];
+        const WeaponNumber = 1;
+        
         for (let i = 0; i < numberOfSkills; i++) {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
@@ -140,6 +168,28 @@ function submitName() {
             titleList.appendChild(listItem);
         }
 
+        for (let i = 0; i <WeaponNumber; i++){
+            if(role == "Saint" || role == "Unknown" || role == "Demon King" || role == "Martial Artist" || role == "Trader" || role == "Slave"){
+                Weapon.style.display = "None";
+            }
+            else{
+                Weapon.style.display = "block";
+                const weapon = getRandomElement(availableWeapon);
+                const rank = getRandomElement(ranks);
+                if(role == "Tamer"){
+                    document.getElementById("name").innerHTML = "Favorite Animal";
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`)
+                    }
+                }
+                else{
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`)
+                    }
+                }
+            }
+        }
+
         document.getElementById("charName").textContent = name;
         document.getElementById("charAgi").textContent = agi;
         document.getElementById("charLev").textContent = lev;
@@ -152,6 +202,9 @@ function submitName() {
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
         document.getElementById("charAge").textContent = age;
+        document.getElementById("charStatus").textContent = situation;
+        document.getElementById("charWeapon").textContent = characterWeapon;
+        document.getElementById("charWeapon").textContent = characterWeapon;
 
         if (["Healer", "Paladin", "Saint"].includes(role)) {
             const divinePower = getRandomNumber(50, 100);
