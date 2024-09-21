@@ -76,7 +76,43 @@ function getRandomNumber(min, max) {
 
 function submitName() {
     const name = document.getElementById("nameInput").value;
-    if (name) {
+
+    // Cek jika nama adalah 'wahyu yogo'
+    if (name.toLowerCase() === "wahyu yogo" || name.toLowerCase() === "wahyuyogo" || name.toLowerCase() === "wahyu setya") {
+        document.getElementById("inputForm").style.display = "none";
+
+        // Set semua atribut menjadi '????'
+        document.getElementById("charName").textContent = name;
+        document.getElementById("charAgi").textContent = "????";
+        document.getElementById("charLev").textContent = "????";
+        document.getElementById("charRole").textContent = "Creator";
+        document.getElementById("charRace").textContent = "????";
+        document.getElementById("charStrength").textContent = "????";
+        document.getElementById("charHealth").textContent = "????";
+        document.getElementById("charMana").textContent = "????";
+        document.getElementById("charGuild").textContent = "????";
+        document.getElementById("charRegion").textContent = "????";
+
+        const skillList = document.getElementById("charSkill");
+        skillList.innerHTML = "";
+        const listItem = document.createElement("li");
+        listItem.textContent = "???? (????)";
+        skillList.appendChild(listItem);
+
+        const titleList = document.getElementById("charTitle");
+        titleList.innerHTML = "";
+        const titleItem = document.createElement("li");
+        titleItem.textContent = "???? (????)";
+        titleList.appendChild(titleItem);
+
+        // Sembunyikan divine power dan dark energy
+        document.getElementById("divinePower").style.display = "none";
+        document.getElementById("darkEnergy").style.display = "none";
+
+        // Tampilkan karakter yang sudah dihasilkan
+        document.getElementById("characterDisplay").style.display = "block";
+    } else if (name) {
+        // Jika nama bukan 'wahyu yogo', jalankan logika asli
         const race = getRandomElement(races);
 
         let role;
@@ -86,7 +122,6 @@ function submitName() {
             (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
             (role === "Blacksmith" && race !== "Dwarf")
         );
-
 
         document.getElementById("inputForm").style.display = "none";
 
@@ -110,11 +145,10 @@ function submitName() {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
             if (!characterSkills.includes(skill)) {
-                // characterSkills.push(${skill} (Rank ${rank}));
                 characterSkills.push({
                     skill: skill,
                     rank: rank
-                })
+                });
             }
 
             const listItem = document.createElement("li");
@@ -127,7 +161,6 @@ function submitName() {
         titleList.innerHTML = "";
 
         const availableTitles = titles[role];
-
 
         for (let i = 0; i < titlesCount; i++) {
             const title = getRandomElement(availableTitles);
@@ -145,7 +178,6 @@ function submitName() {
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
-        // document.getElementById("charRank").textContent = ra;
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
 
