@@ -37,7 +37,8 @@ const roleSkills = {
     "Archmage": ["Ultimate Fireball", "Meteor Shower", "Elemental Mastery", "Arcane Surge", "Mystic Explosion", "Mana Mastery", "Teleportation", "Time Warp", "Mana Storm", "Reality Shatter", "Infinite Wisdom", "Arcane Barrage", "Planar Rift", "Arcane Manipulation", "Elemental Fury", "Cosmic Insight", "Eternal Flame", "Mana Explosion", "Spellsurge", "Mana Infusion"],
     "Slave": ["Endurance", "Survival Instinct", "Pain Tolerance", "Obedience", "Escape Artist", "Servitude Mastery", "Submission", "Silent Endurance", "Servant's Will", "Willpower", "Stealth Work", "Escape Plan", "Unseen Movement", "Rebellious Mind", "Survival Expert", "Hidden Talent", "Chained Strength", "Mental Resilience", "Resistance", "Hidden Strength"],
     "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"],
-    "Rifleman": ["Precise Aim", "Wind Estimation", "Critical Strike", "Lethality", "Mass Shooting", "Bayonet Fight", "Multishot", "Dead Eye", "Overload", "Suppresive Fire", "Close Air Support", "Guerrilla", "Artillery Strike", "Iron Clad", "Dual Welding", "Bullseye", "Total Focus", "Eyes In The Sky", "Infinite Mazagine", "Bulletproof", "Limit Break", "Two Birds One Stone", "APHE Shots"]
+    "Rifleman": ["Precise Aim", "Wind Estimation", "Critical Strike", "Lethality", "Mass Shooting", "Bayonet Fight", "Multishot", "Dead Eye", "Overload", "Suppresive Fire", "Close Air Support", "Guerrilla", "Artillery Strike", "Iron Clad", "Dual Welding", "Bullseye", "Total Focus", "Eyes In The Sky", "Infinite Mazagine", "Bulletproof", "Limit Break", "Two Birds One Stone", "APHE Shots"],
+    "Shaman": ["Spirit Summoning", "Totem Mastery", "Healing Wave", "Ancestral Guidance", "Lightning Strike", "Earthquake", "Spirit Walk", "Fire Totem", "Water Shield", "Wind Rush", "Nature's Fury", "Totemic Recall", "Hex", "Storm Call", "Thunder Clap", "Feral Spirit", "Spirit Bond", "Tribal Knowledge", "Cleansing Ritual", "Spirit Control"]
 };
 const stage = ["Married", "Divorced", "Widowed", "Alone", "Engaged"];
 const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS", "SSS"];
@@ -65,7 +66,7 @@ const titles = {
     "Archmage": ["Archmage Supreme", "Master of Magic", "Eternal Scholar", "Cosmic Magus", "Arcane Sovereign"],
     "Slave": ["Survivor", "Endurer of Chains", "Liberated Soul", "Unseen Warrior", "Silent Strength"],
     "Chef": ["Ultimate Chef", "Gourmet King", "Master of Flavors", "Grand Cook", "Sovereign of Taste"],
-    "Rifleman": ["Deadshot", "Precision Shooter", "Pistol Specialist", "Rifle Expert", "Marines for Life"],
+    "Rifleman": ["Deadshot", "Precision Shooter", "Pistol Specialist", "Rifle Expert", "Marine for Life"],
 };
 const roleWeapon = {
     "Knight": ["Heavy Sword", "Short Sword", "Sword and Shield", "Spear", "Club", "Bat"],
@@ -90,7 +91,7 @@ const roleWeapon = {
     "Archmage": ["Staff of Water", "Staff of Earth", "Staff of Fire", "Staff of Darkness", "Metal Staff", "Magic Book", "Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
     "Slave": ["None"],
     "Chef": ["Cleaver", "Axe", "Spatula", "Saucepan", "Wok", "Pot", "Kettle", "Rolling Pin"],
-    "Rifleman": ["Pistol", "Dagger", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle", "Flashbang", "Frag Grenade"]
+    "Rifleman": ["Pistol", "Dagger", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle", "Flashbang", "Frag Grenade"],
 };
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -105,12 +106,21 @@ function submitName() {
         const race = getRandomElement(races);
 
         let role;
-        do {
-            role = getRandomElement(roles);
-        } while (
-            (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
-            (role === "Blacksmith" && race !== "Dwarf")
-        );
+        const randomChance = Math.random() * 100;
+
+        if (randomChance < 1) {
+            role = "Demon King";
+        } else if (randomChance > 98) {
+            role = "Saint";
+        } else {
+            do {
+                role = getRandomElement(roles);
+            } while (
+                (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
+                (role === "Blacksmith" && race !== "Dwarf") ||
+                ["Demon King", "Saint"].includes(role)
+            );
+        }
 
 
         document.getElementById("inputForm").style.display = "none";
@@ -121,15 +131,40 @@ function submitName() {
         const agi = getRandomNumber(1, 100);
         const lev = getRandomNumber(1, 100);
         const guild = getRandomElement(guilds);
-        const ra = getRandomElement(ranks);
         const region = getRandomElement(regions);
         const characterSkills = [];
         const numberOfSkills = getRandomNumber(3, 5);
         const age = getRandomNumber(22, 60);
         const situation = getRandomElement(stage);
         const skillList = document.getElementById("charSkill");
-        skillList.innerHTML = "";
+        let ra = "";
 
+        //Band score for ability and title
+        const F_score = 1;
+        const E_score = 5;
+        const D_score = 10;
+        const C_score = 25;
+        const B_score = 50;
+        const A_score = 150;
+        const S_score = 300;
+        const SS_score = 500;
+        const SSS_score = 1000;
+        //End of band score
+
+        //Total band score for overall ranking
+        const F_overall = 10;
+        const E_overall = 50;
+        const D_overall = 100;
+        const C_overall = 300;
+        const B_overall = 700
+        const A_overall = 1250;
+        const S_overall = 2000;
+        const SS_overall = 3000;
+        const SSS_overall = 4500;
+        //End of total band score
+
+        skillList.innerHTML = "";
+        var totalscore = 0;
         const availableSkills = roleSkills[role];
         const availableWeapon = roleWeapon[role];
         const characterWeapon = [];
@@ -138,6 +173,32 @@ function submitName() {
         for (let i = 0; i < numberOfSkills; i++) {
             const skill = getRandomElement(availableSkills);
             const rank = getRandomElement(ranks);
+            if(rank == "F"){
+                totalscore = totalscore + F_score;
+            }
+            else if(rank == "E"){
+                totalscore = totalscore + E_score;
+            }
+            else if(rank == "D"){
+                totalscore = totalscore + D_score;
+            }
+            else if(rank == "C"){
+                totalscore = totalscore + C_score;
+            }
+            else if(rank == "B"){
+                totalscore = totalscore + B_score;
+            }
+            else if(rank == "A"){
+            }
+            else if(rank == "S"){
+                totalscore = totalscore + S_score;
+            }
+            else if(rank == "SS"){
+                totalscore = totalscore + SS_score;
+            }
+            else{
+                totalscore = totalscore + SSS_score;
+            }
             if (!characterSkills.includes(skill)) {
                 //characterSkills.push(`${skill} (Rank ${rank})`);
                 characterSkills.push({
@@ -145,7 +206,6 @@ function submitName() {
                     rank: rank
                 })
             }
-
             const listItem = document.createElement("li");
             listItem.textContent = `${skill} (Rank ${rank})`;
             skillList.appendChild(listItem);
@@ -161,6 +221,33 @@ function submitName() {
         for (let i = 0; i < titlesCount; i++) {
             const title = getRandomElement(availableTitles);
             const titleRank = getRandomElement(ranks);
+            if(titleRank == "F"){
+                totalscore = totalscore + F_score;
+            }
+            else if(titleRank == "E"){
+                totalscore = totalscore + E_score;
+            }
+            else if(titleRank == "D"){
+                totalscore = totalscore + D_score;
+            }
+            else if(titleRank == "C"){
+                totalscore = totalscore + C_score;
+            }
+            else if(titleRank == "B"){
+                totalscore = totalscore + B_score;
+            }
+            else if(titleRank == "A"){
+                totalscore = totalscore + A_score;
+            }
+            else if(titleRank == "S"){
+                totalscore = totalscore + S_score;
+            }
+            else if(titleRank == "SS"){
+                totalscore = totalscore + SS_score;
+            }
+            else{
+                totalscore = totalscore + SSS_score
+            }
             const listItem = document.createElement("li");
             listItem.textContent = `${title} (Rank ${titleRank})`;
             titleList.appendChild(listItem);
@@ -169,11 +256,96 @@ function submitName() {
         for (let i = 0; i <WeaponNumber; i++){
             const weapon = getRandomElement(availableWeapon);
             const rank = getRandomElement(ranks);
-            if(!characterWeapon.includes(weapon)){
-                characterWeapon.push(`${weapon} (Rank ${rank})`)
+            if(weapon == "None"){
+                characterWeapon.push(`${weapon}`)
+            }
+            else{
+                if(rank == "F"){
+                    totalscore = totalscore + F_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "E"){
+                    totalscore = totalscore + E_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "D"){
+                    totalscore = totalscore + D_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "C"){
+                    totalscore = totalscore + C_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "B"){
+                    totalscore = totalscore + B_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "A"){
+                    totalscore = totalscore + A_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "S"){
+                    totalscore = totalscore + S_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else if(rank == "SS"){
+                    totalscore = totalscore + SS_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
+                else{
+                    totalscore = totalscore + SSS_score;
+                    if(!characterWeapon.includes(weapon)){
+                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                    }
+                }
             }
         }
-
+        if(totalscore < F_overall){
+            ra = "N/A";
+        }
+        else if (totalscore > F_overall && totalscore < E_overall){
+            ra = "F";
+        }
+        else if(totalscore > E_overall && totalscore < D_overall){
+            ra = "E";
+        }
+        else if(totalscore > D_overall && totalscore < C_overall){
+            ra = "D";
+        }
+        else if(totalscore > C_overall && totalscore < B_overall){
+            ra = "C";
+        }
+        else if(totalscore > B_overall && totalscore < A_overall){
+            ra = "B";
+        }
+        else if(totalscore > A_overall && totalscore < S_overall){
+            ra = "A";
+        }
+        else if(totalscore > S_overall && totalscore < SS_overall){
+            ra = "S";
+        }
+        else if(totalscore > SS_overall && totalscore < SSS_overall){
+            ra = "SS";
+        }
+        else{
+            ra = "SSS"
+        }
         document.getElementById("charName").textContent = name;
         document.getElementById("charAgi").textContent = agi;
         document.getElementById("charLev").textContent = lev;
@@ -182,7 +354,7 @@ function submitName() {
         document.getElementById("charStrength").textContent = strength;
         document.getElementById("charHealth").textContent = health;
         document.getElementById("charMana").textContent = mana;
-        //document.getElementById("charRank").textContent = ra;
+        document.getElementById("charRank").textContent = ra;
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
         document.getElementById("charAge").textContent = age;
