@@ -85,7 +85,6 @@ function submitName() {
     if (name.toLowerCase() === "wahyu yogo" || name.toLowerCase() === "wahyuyogo" || name.toLowerCase() === "wahyu setya") {
         document.getElementById("inputForm").style.display = "none";
 
-        // Set semua atribut menjadi '????'
         document.getElementById("charName").textContent = name;
         document.getElementById("charAgi").textContent = "????";
         document.getElementById("charLev").textContent = "????";
@@ -109,31 +108,27 @@ function submitName() {
         titleItem.textContent = "???? (????)";
         titleList.appendChild(titleItem);
 
-        // Sembunyikan divine power dan dark energy
         document.getElementById("divinePower").style.display = "none";
         document.getElementById("darkEnergy").style.display = "none";
 
-        // Tampilkan karakter yang sudah dihasilkan
         document.getElementById("characterDisplay").style.display = "block";
     } else if (name) {
         const race = getRandomElement(races);
 
         let role;
-        const randomChance = Math.random() * 100; // Random number between 0 and 100
+        const randomChance = Math.random() * 100;
 
-        // 1% chance for Demon King or Saint
-        if (randomChance < 15) {
+        if (randomChance < 5) {
             role = "Demon King";
-        } else if (randomChance < 15) {
+        } else if (randomChance < 10) {
             role = "Saint";
         } else {
-            // 50% chance for any other role
             do {
                 role = getRandomElement(roles);
             } while (
                 (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
                 (role === "Blacksmith" && race !== "Dwarf") ||
-                ["Demon King", "Saint"].includes(role) // Avoid reselecting Demon King or Saint in this block
+                ["Demon King", "Saint"].includes(role)
             );
         }
 
