@@ -89,13 +89,13 @@ const roleWeapon = {
     "Archmage": ["Staff of Water", "Staff of Earth", "Staff of Fire", "Staff of Darkness", "Metal Staff", "Magic Book", "Staff of Darkness", "Staff of Skull", "Femur", "Bone Staff", "Book of the Undead"],
     "Slave": ["None"],
     "Chef": ["Cleaver", "Axe", "Spatula", "Saucepan", "Wok", "Pot", "Kettle", "Rolling Pin", "Knife"],
-    "Rifleman": ["Pistol", "Revolver", "Dagger", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle", "Flashbang", "Frag Grenade"],
-    "Sapper": ["C4 Pack", "Grenade", "GP Machine Gun", "RPG", "Mortar Launcher", "Grenade Launcher", "Panzerfaust", "Dagger", "Pistol", "Revolver"]
+    "Rifleman": ["Pistol", "Revolver", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle"],
+    "Sapper": ["C4 Pack", "Grenade", "GP Machine Gun", "RPG", "Mortar Launcher", "Grenade Launcher", "Panzerfaust", "Pistol", "Revolver"]
 };
 function getRandomElement(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(Math.random()*arr.length)];
 }
-
+var totalscore = 0;
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -117,7 +117,7 @@ function submitName() {
             } while (
                 (["Demon", "Sarkaz", "Orc"].includes(race) && ["Healer", "Paladin", "Saint"].includes(role)) ||
                 (role === "Blacksmith" && race !== "Dwarf") ||
-                ["Demon King", "Saint"].includes(role)
+                ["Demon King", "Saint"].includes(role) || ((role == "Rifleman" || role == "Sapper") && (race == "Beast" || race == "Succubus" || race == "Dwarf" || race == "Feline" || race == "Slime" || race == "Deer"))
             );
         }
 
@@ -163,20 +163,24 @@ function submitName() {
         //End of total band score
 
         skillList.innerHTML = "";
-        var totalscore = 0;
         const availableSkills = roleSkills[role];
         const availableWeapon = roleWeapon[role];
         const characterWeapon = [];
         const WeaponNumber = 1;
-        var ImmunityChance = Math.random() * 1000;
         for (let i = 0; i < numberOfSkills; i++) {
-            const skill = getRandomElement(availableSkills);
-            const rank = getRandomElement(ranks);
-            if(skill == "Total Immunity"){
+            var skill = getRandomElement(availableSkills);
+            var rank = getRandomElement(ranks);
+            var ImmunityChance = Math.random() * 1000;
+            if(ImmunityChance == 1000){
+                skill = "Total Immunity"
                 rank = "SSS";
                 totalscore = totalscore + SSS_score;
             }
             else{
+                do{
+                    skill = getRandomElement(availableSkills);
+                }
+                while(skill == "Total Immunity");
                 if(rank == "F"){
                     totalscore = totalscore + F_score;
                 }
@@ -215,7 +219,6 @@ function submitName() {
             listItem.textContent = `${skill} (Rank ${rank})`;
             skillList.appendChild(listItem);
         }
-
         const titlesCount = getRandomNumber(1, 2);
         const titleList = document.getElementById("charTitle");
         titleList.innerHTML = "";
@@ -224,13 +227,23 @@ function submitName() {
 
 
         for (let i = 0; i < titlesCount; i++) {
-            const title = getRandomElement(availableTitles);
-            const titleRank = getRandomElement(ranks);
+            var NoobChances = Math.random() * 100;
+            var GreatWar = Math.random() * 999999999;
+            var title = getRandomElement(availableTitles);
+            var titleRank = getRandomElement(ranks);
+            if (GreatWar == 5000) {
+                title = "Great War Loser";
+            } else if (GreatWar == 99) {
+                title = "Great War Winner";
+            }
+            if(NoobChances == 50){
+                title = "Noob"
+            }
             if(title == "Black Baron" || title == "Great War Winner"){
                 titleRank = "SSS";
                 totalscore = totalscore + SSS_score;
             }
-            else if(title == "Great War Loser"){
+            else if(title == "Great War Loser" || title == "Noob"){
                 titleRank = "F";
                 totalscore = totalscore + F_score
             }
@@ -334,33 +347,34 @@ function submitName() {
         if(totalscore < F_overall){
             ra = "N/A";
         }
-        else if (totalscore > F_overall && totalscore < E_overall){
+        else if (totalscore >= F_overall && totalscore < E_overall){
             ra = "F";
         }
-        else if(totalscore > E_overall && totalscore < D_overall){
+        else if(totalscore >= E_overall && totalscore < D_overall){
             ra = "E";
         }
-        else if(totalscore > D_overall && totalscore < C_overall){
+        else if(totalscore >= D_overall && totalscore < C_overall){
             ra = "D";
         }
-        else if(totalscore > C_overall && totalscore < B_overall){
+        else if(totalscore >= C_overall && totalscore < B_overall){
             ra = "C";
         }
-        else if(totalscore > B_overall && totalscore < A_overall){
+        else if(totalscore >= B_overall && totalscore < A_overall){
             ra = "B";
         }
-        else if(totalscore > A_overall && totalscore < S_overall){
+        else if(totalscore >= A_overall && totalscore < S_overall){
             ra = "A";
         }
-        else if(totalscore > S_overall && totalscore < SS_overall){
+        else if(totalscore >= S_overall && totalscore < SS_overall){
             ra = "S";
         }
-        else if(totalscore > SS_overall && totalscore < SSS_overall){
+        else if(totalscore >= SS_overall && totalscore < SSS_overall){
             ra = "SS";
         }
         else{
             ra = "SSS"
         }
+        totalscore = totalscore + lev*5;
         document.getElementById("charName").textContent = name;
         document.getElementById("charAgi").textContent = agi;
         document.getElementById("charLev").textContent = lev;
