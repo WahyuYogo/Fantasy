@@ -90,7 +90,7 @@ const roleWeapon = {
     "Slave": ["None"],
     "Chef": ["Cleaver", "Axe", "Spatula", "Saucepan", "Wok", "Pot", "Kettle", "Rolling Pin", "Knife"],
     "Rifleman": ["Pistol", "Revolver", "Shotgun", "Assault Rifle", "Light Machine Gun", "Heavy Machine Gun", "Sniper Rifle"],
-    "Sapper": ["C4 Pack", "Grenade", "GP Machine Gun", "RPG", "Mortar Launcher", "Grenade Launcher", "Panzerfaust", "Pistol", "Revolver"]
+    "Sapper": ["C4 Pack", "Grenade", "GP Machine Gun", "RPG", "Mortar Launcher", "Grenade Launcher", "Panzerfaust", "Pistol", "Revolver", "Flamethrower"]
 };
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random()*arr.length)];
@@ -216,7 +216,7 @@ function submitName() {
                 })
             }
             const listItem = document.createElement("li");
-            listItem.textContent = `${skill} (Rank ${rank})`;
+            listItem.textContent = `${skill} (${rank})`;
             skillList.appendChild(listItem);
         }
         const titlesCount = getRandomNumber(1, 2);
@@ -277,7 +277,7 @@ function submitName() {
                 }
             }
             const listItem = document.createElement("li");
-            listItem.textContent = `${title} (Rank ${titleRank})`;
+            listItem.textContent = `${title} (${titleRank})`;
             titleList.appendChild(listItem);
         }
 
@@ -291,55 +291,55 @@ function submitName() {
                 if(rank == "F"){
                     totalscore = totalscore + F_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "E"){
                     totalscore = totalscore + E_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "D"){
                     totalscore = totalscore + D_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "C"){
                     totalscore = totalscore + C_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "B"){
                     totalscore = totalscore + B_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "A"){
                     totalscore = totalscore + A_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "S"){
                     totalscore = totalscore + S_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else if(rank == "SS"){
                     totalscore = totalscore + SS_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
                 else{
                     totalscore = totalscore + SSS_score;
                     if(!characterWeapon.includes(weapon)){
-                        characterWeapon.push(`${weapon} (Rank ${rank})`);
+                        characterWeapon.push(`${weapon} (${rank})`);
                     }
                 }
             }
