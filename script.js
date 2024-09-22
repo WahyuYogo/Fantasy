@@ -1,20 +1,22 @@
 const roles = [
-    "Knight", "Mage", "Rogue", "Archer", "Paladin", "Blacksmith", "Healer", "Assassin", "Saint", "Tamer",
-    "Necromancer", "Unknown", "Death Knight", "Farmer", "Demon King", "Swordman", "Magic Swordman",
-    "Martial Artist", "Trader", "Archmage", "Slave", "Chef", "Gun Slinger", "Shaman"
+    "Knight", "Mage", "Realm God", "Rogue", "Archer", "Paladin", "Blacksmith", "Healer", "Assassin", "Saint", "Tamer",
+    "Necromancer", "Emperor", "King", "Queen", "Unknown", "Death Knight", "Farmer", "Demon King", "Swordman", "Magic Swordman",
+    "Martial Artist", "Trader", "Archmage", "Slave", "Chef", "Gun Slinger", "Shaman", "Femboy", "Engineer"
 ];
 
 const races = [
     "Human", "Elf", "Dwarf", "Orc", "Beast", "Dark Elf", "Dragon", "Half Dragon", "Half Elf", "Demon",
     "Werewolf", "Succubus", "Divine Being", "Feline", "Frogman", "Lizardman", "Slime", "Jawir",
-    "Sarkaz", "Liberi", "Sankta", "Deer", "Fishman", "Unknown", "Vampire", "Elemental"
+    "Sarkaz", "Liberi", "Sankta", "Deer", "Fishman", "Unknown", "Vampire", "Elemental", "Half God", "God"
 ];
 
 const regions = [
-    "LowRess Kingdom", "Liberia", "Great Forest", "Heavenhold"
+    "LowRess Kingdom", "Liberia", "Great Forest", "Heavenhold", "Asgardia", "Ruins of Ancient Zenryushen Empire", "Basthi-Varde United Nations"
 ];
 
 const roleSkills = {
+    "Femboy": ["Trap Charms", "You Are Gay", "Feminine Body shape", "Lust", "Energy Drain"],
+    "Engineer": ["Creative Skill", "Create Skill", "Genius Inovation Mode", "Dimentional Tool Box"],
     "Knight": ["Sword Mastery", "Shield Mastery", "Mounted Combat", "War Cry", "Heavy Armor", "Tactical Strategy", "Battle Charge", "Shield Bash", "Combat Reflexes", "Defensive Stance", "Sword Block", "Battlefield Awareness", "Parry", "Shield Slam", "Armor Reinforcement", "Toughness", "Sword Precision", "Holy Vow", "Defender's Resolve", "Battle Endurance"],
     "Mage": ["Fire Magic", "Water Magic", "Earth Magic", "Wind Magic", "Lightning Magic", "Arcane Magic", "Teleportation", "Time Manipulation", "Illusion", "Energy Bolt", "Mana Control", "Dark Magic", "Summon Elementals", "Meteor Shower", "Magic Shield", "Mana Drain", "Arcane Blast", "Magic Ward", "Mana Burst", "Elemental Mastery"],
     "Rogue": ["Stealth", "Sneak Attack", "Lockpicking", "Pickpocketing", "Backstab", "Evasion", "Poison Crafting", "Agility Boost", "Silent Step", "Ambush", "Trap Detection", "Shadow Step", "Dagger Mastery", "Dual Wielding", "Smoke Bomb", "Shadow Meld", "Thievery", "Quick Escape", "Decoy", "Cloak of Shadows"],
@@ -30,6 +32,8 @@ const roleSkills = {
     "Death Knight": ["Death Blade", "Soul Drain", "Plague Strike", "Undead Mastery", "Dark Armor", "Cursed Shield", "Death Charge", "Grim Command", "Necrotic Slash", "Unholy Aura", "Corpse Explosion", "Bone Shield", "Life Steal", "Dark Pact", "Vampiric Strike", "Reaper's Touch", "Soul Reaper", "Dark Command", "Death's Advance", "Doom Strike"],
     "Farmer": ["Harvesting", "Soil Knowledge", "Crop Mastery", "Animal Husbandry", "Seed Crafting", "Irrigation Mastery", "Plowing", "Plant Growth", "Land Fertility", "Livestock Care", "Crop Rotation", "Agricultural Trade", "Farming Tools", "Pest Control", "Farm Management", "Compost Creation", "Breeding Mastery", "Crop Forecasting", "Herbology", "Barn Construction"],
     "Demon King": ["Dark Command", "Infernal Flames", "Demon Summoning", "Absolute Domination", "Demonic Aura", "Soul Corruption", "Hellfire", "Dark Rebirth", "Demon Lord's Might", "Dark Pact", "Summon Demon Hordes", "Hellstorm", "Infernal Protection", "Shadow Flame", "Doom Prophecy", "Chaos Control", "Abyssal Magic", "Soul Reaver", "Eternal Torment", "Cursed Throne"],
+    "King": ["Troops Command", "Grand Leadership", "Absolute Order", "Masculine Charm", "Brave", "Intimidation", "Light Spear", "Golden Sun Transformation", "King's Might", "Meme Throne"], 
+    "Emperor": ["Troops Command", "Grand Leadership", "Absolute Order", "Masculine Charm", "Brave", "Intimidation", "Light Sword", "Transformation Skill", "Emperor's Might", "Sigma Throne"],
     "Swordman": ["Sword Mastery", "Blade Dance", "Quick Strike", "Deflect", "Parry", "Sword Combo", "Sharp Focus", "Sword Spin", "Deadly Slash", "Sword Precision", "Sword Reflection", "Blade Guard", "Heavy Strike", "Sword Blitz", "Raging Slash", "Sword of Fury", "Rapid Slash", "Sword Counter", "Blade Crush", "Whirling Blade"],
     "Magic Swordman": ["Sword Mastery", "Elemental Blade", "Arcane Strike", "Mana Infusion", "Sword Dance", "Enchanted Weapon", "Magic Burst", "Quick Slash", "Spellblade", "Blade of Flames", "Ice Blade", "Lightning Edge", "Earth Cleave", "Wind Cutter", "Sword of Light", "Darkness Slash", "Sword Aura", "Mystic Edge", "Arcane Barrier", "Mana Shield"],
     "Martial Artist": ["Hand-to-Hand Combat", "Pressure Point Strike", "Fists of Fury", "Agility Boost", "Palm Strike", "Roundhouse Kick", "Counterattack", "Chi Focus", "Tiger Stance", "Dragon Kick", "Iron Fist", "Body Hardening", "Mental Focus", "Chi Channeling", "Flurry of Blows", "Disarm", "Sweeping Kick", "Nerve Strike", "Power Punch", "Energy Burst"],
@@ -38,11 +42,12 @@ const roleSkills = {
     "Slave": ["Endurance", "Survival Instinct", "Pain Tolerance", "Obedience", "Escape Artist", "Servitude Mastery", "Submission", "Silent Endurance", "Servant's Will", "Willpower", "Stealth Work", "Escape Plan", "Unseen Movement", "Rebellious Mind", "Survival Expert", "Hidden Talent", "Chained Strength", "Mental Resilience", "Resistance", "Hidden Strength"],
     "Gun Slinger": ["Gun Mastery", "Precision Shooting", "Rapid Fire", "Bullet Crafting", "Dual Wielding", "Long Range Shot", "Headshot", "Ricochet Shot", "Explosive Bullet", "Piercing Shot", "Steady Aim", "Trick Shot", "Reload Speed", "Rapid Reload", "Marksmanship", "Firearm Tactics", "Armor Piercing Rounds", "Blindfire", "Tactical Retreat", "Sniper Mastery"],
     "Shaman": ["Spirit Summoning", "Totem Mastery", "Healing Wave", "Ancestral Guidance", "Lightning Strike", "Earthquake", "Spirit Walk", "Fire Totem", "Water Shield", "Wind Rush", "Nature's Fury", "Totemic Recall", "Hex", "Storm Call", "Thunder Clap", "Feral Spirit", "Spirit Bond", "Tribal Knowledge", "Cleansing Ritual", "Spirit Control"],
-    "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"]
+    "Chef": ["Cooking", "Ingredient Sourcing", "Flavor Mastery", "Knife Skills", "Heat Control", "Herb Knowledge", "Food Presentation", "Recipe Creation", "Gourmet Crafting", "Culinary Expertise", "Meal Preparation", "Food Preservation", "Baking Mastery", "Herb Infusion", "Ingredient Substitution", "Food Safety", "Multitasking", "Culinary Innovation", "Taste Testing", "Plating Expertise"],
+    "God": ["Time Stop", "New World", "Humanoid Transform", "Authority of Realms", "Create Mode", "Telepathy", "Reset Skill"]
 };
 
-const ranks = ["F", "E", "D", "C", "B", "A", "S"];
-const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire"];
+const ranks = ["F", "E", "D", "C", "B", "A", "S", "SS"];
+const guilds = ["PSHT", "RHODES", "Silverthorn", "Dragonshade", "Shadowspire", "IKSPI", "Leviathanes"];
 const titles = {
     "Knight": ["Champion of Light", "Guardian of the Realm", "Master of Arms", "Sword Guardian", "Defender of the Weak", "Anomaly", "Noob"],
     "Mage": ["Master of Elements", "Arcane Scholar", "Stormcaller", "Elemental Weaver", "Mystic of the Arcane", "Anomaly", "Noob"],
@@ -67,7 +72,11 @@ const titles = {
     "Slave": ["Survivor", "Endurer of Chains", "Liberated Soul", "Unseen Warrior", "Silent Strength", "Anomaly", "Noob"],
     "Chef": ["Ultimate Chef", "Gourmet King", "Master of Flavors", "Grand Cook", "Sovereign of Taste", "Anomaly", "Noob"],
     "Gun Slinger": ["Sharpshooter", "Bullet Storm", "Master Marksman", "Gun Master", "Sniper Elite", "Anomaly", "Noob"],
-    "Shaman": ["Spirit Walker", "Totem Lord", "Elemental Conduit", "Mystic of the Wild", "Keeper of the Spirits", "Anomaly", "Noob"]
+    "Shaman": ["Spirit Walker", "Totem Lord", "Elemental Conduit", "Mystic of the Wild", "Keeper of the Spirits", "Anomaly", "Noob"],
+    "World God": ["Creator of Realms", "God", "Unknown Creature", "Master of Heaven", "Anomaly", "Noob"],
+    "Femboy Hooters": ["Fuck! You're Gay!", "Trap and Femboy Lover", "Incubus(?)", "Anomaly", "Noob"],
+    "Engineer": ["Master At Arms", "Master of Engineering", "Repairer", "Genius Inovator", "Magical Hands"]
+    
 
 };
 
@@ -82,7 +91,7 @@ function getRandomNumber(min, max) {
 function submitName() {
     const name = document.getElementById("nameInput").value;
 
-    if (name.toLowerCase() === "wahyu yogo" || name.toLowerCase() === "wahyuyogo" || name.toLowerCase() === "wahyu setya") {
+    if (name.toLowerCase() === "wahyuyogo" || name.toLowerCase() === "wahyu yogo" || name.toLowerCase() === "wahyu setya") {
         document.getElementById("inputForm").style.display = "none";
 
         document.getElementById("charName").textContent = name;
@@ -122,7 +131,9 @@ function submitName() {
             role = "Demon King";
         } else if (randomChance < 10) {
             role = "Saint";
-        } else {
+        } else if (randomChance <2) {
+            role = "Realm God";
+        } else
             do {
                 role = getRandomElement(roles);
             } while (
@@ -130,7 +141,7 @@ function submitName() {
                 (role === "Blacksmith" && race !== "Dwarf") ||
                 ["Demon King", "Saint"].includes(role)
             );
-        }
+        } 
 
         document.getElementById("inputForm").style.display = "none";
 
@@ -190,7 +201,7 @@ function submitName() {
         document.getElementById("charGuild").textContent = guild;
         document.getElementById("charRegion").textContent = region;
 
-        if (["Healer", "Paladin", "Saint"].includes(role)) {
+        if (["Healer", "Paladin", "Saint",].includes(role)) {
             const divinePower = getRandomNumber(50, 100);
             document.getElementById("charDivinePower").textContent = divinePower;
             document.getElementById("divinePower").style.display = "block";
@@ -202,8 +213,14 @@ function submitName() {
             document.getElementById("darkEnergy").style.display = "block";
         }
 
+        if (["World God", "Realm God"].includes(role)) {
+            const divinePower = getRandomNumber(1000, 100.000);
+            document.getElementById("charDivinePower").textContent = divinePower;
+            document.getElementById("divinePower").style.display = "block";
         document.getElementById("characterDisplay").style.display = "block";
-    } else {
+        } 
+          
+          else {
         alert("Please enter a name.");
     }
 }
