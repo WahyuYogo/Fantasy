@@ -227,13 +227,13 @@ function submitName() {
 
 
         for (let i = 0; i < titlesCount; i++) {
-            var NoobChances = Math.random() * 100;
-            var GreatWar = Math.random() * 999999999;
+            var NoobChances = getRandomNumber(0, 100);
+            var GreatWar = getRandomNumber(0, 1000);
             var title = getRandomElement(availableTitles);
             var titleRank = getRandomElement(ranks);
-            if (GreatWar == 5000) {
+            if (GreatWar == 1000) {
                 title = "Great War Loser";
-            } else if (GreatWar == 99) {
+            } else if (GreatWar == 0) {
                 title = "Great War Winner";
             }
             if(NoobChances == 50){
